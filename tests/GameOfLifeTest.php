@@ -10,13 +10,7 @@ final class GameOfLifeTest extends TestCase
 
   private function nextState(Cell $cell, int $aliveNeighboursCount): Cell
   {
-    if ($cell === Cell::Dead && $aliveNeighboursCount === 2) {
-      return Cell::Dead;
-    }
-    if ($aliveNeighboursCount === 2 || $aliveNeighboursCount === 3) {
-      return Cell::Alive;
-    }
-    return Cell::Dead;
+    return $cell->nextState($aliveNeighboursCount);
   }
 
   #[Test]
