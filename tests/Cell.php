@@ -17,7 +17,7 @@ enum Cell
 
   private function handleAlive(int $aliveNeighboursCount): self
   {
-    if ($aliveNeighboursCount === 2 || $aliveNeighboursCount === 3) {
+    if (in_array($aliveNeighboursCount, [2, 3], true)) {
       return $this;
     }
 
