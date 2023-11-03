@@ -11,7 +11,7 @@ final class GameOfLifeTest extends TestCase
 
   private function nextState(Cell $cell, int $aliveNeighboursCount): Cell
   {
-    if ($aliveNeighboursCount > 1) {
+    if ($aliveNeighboursCount === 2 || $aliveNeighboursCount === 3) {
       return Cell::Alive;
     }
     return Cell::Dead;
@@ -31,6 +31,15 @@ final class GameOfLifeTest extends TestCase
     $cell = Cell::Alive;
     self::assertEquals(Cell::Alive, $this->nextState($cell, 2));
     self::assertEquals(Cell::Alive, $this->nextState($cell, 3));
+  }
+
+  #[Test]
+  public function a_cell_dies_if_more_than_3_live_neighbours(): void
+  {
+    $cell = Cell::Alive;
+    foreach (range(4, 8) as $aliveNeighboursCount) {
+      self::assertEquals(Cell::Dead, $this->nextState($cell, $aliveNeighboursCount));
+    }
   }
 }
 
